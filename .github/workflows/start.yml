@@ -20,19 +20,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Print Hello Message in Testing
-      run : echo "Hello World from Testing job"
-    
-    - name: Actions-checkout
-      uses: actions/checkout@master
-      with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: checkout repo content
+      uses: actions/checkout@v2 # checkout the repository content to github runner
         
     - name: Create report file
       run: date +%s > report.txt
-
-    - name: Commit & Push changes
-      uses: actions-js/push@master
+       
+    - name: commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
+          
+    - name: push changes
+      uses: ad-m/github-push-action@v0.6.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}     
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main    
