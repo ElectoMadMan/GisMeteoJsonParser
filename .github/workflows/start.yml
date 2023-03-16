@@ -11,6 +11,9 @@ name: Start-GisMeteoJSONParser
 on:
   workflow_dispatch:
   pull_request:
+  schedule:
+    # 3:30 and 4:30 UTC (6:30 and 7:30 MSK)
+    - cron:  '30 3,17 * * *'
   push:
     branches:
       - main
