@@ -24,7 +24,7 @@ jobs:
       uses: actions/checkout@v2 # checkout the repository content to github runner
         
     - name: Create report file
-      run: date +%s > report.txt
+      run: date -u > report.txt
       
     - name: setup python
       uses: actions/setup-python@v4
@@ -36,10 +36,10 @@ jobs:
         python -m pip install --upgrade pip
     #    pip install -r requirements.txt
           
-    #- name: execute py script # run main.py
+    - name: execute py script # run main.py
     #  env:
     #    SOME_SECRET: ${{ secrets.SOME_SECRET }}
-    #  run: python main.py
+      run: python gismeteojsonparser.py
 
     - name: commit files
       run: |
