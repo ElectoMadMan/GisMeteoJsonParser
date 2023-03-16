@@ -11,10 +11,7 @@ env:
   APPLICATION_NAME    : "MyFlask"
   DEPLOY_PACKAGE_NAME : "flask-deploy-ver-${{ github.sha }}"
 
-on: 
-  push:
-    branches: 
-      - master
+on: workflow_dispatch
 
 jobs:
   my_testing:
