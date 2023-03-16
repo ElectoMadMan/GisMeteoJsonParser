@@ -22,15 +22,17 @@ jobs:
     steps:
     - name: Print Hello Message in Testing
       run : echo "Hello World from Testing job"
-      
-    - uses: actions/checkout@v3
+    
+    - name: Actions-checkout
+      uses: actions/checkout@master
       with:
-        ref: ${{ github.head_ref }}
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
         
     - name: Create report file
       run: date +%s > report.txt
 
-    - name: Commit report file
-      uses: stefanzweifel/git-auto-commit-action@v4
+    - name: Commit & Push changes
+      uses: actions-js/push@master
       with:
-        commit_message: Commit report file
+        github_token: ${{ secrets.GITHUB_TOKEN }}     
