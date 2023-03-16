@@ -18,15 +18,14 @@ jobs:
     - name: Print Hello Message in Testing
       run : echo "Hello World from Testing job"
       
-    - name: Git clone my repo
-      uses: actions/checkout@v2
-    
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+        
     - name: Create report file
       run: date +%s > report.txt
 
-    - name: Commit report
-      run: |
-        git config --global user.name 'ElectoMadMan'
-        git config --global user.email 'ElectoMadMan@users.noreply.github.com'
-        git commit -am "Automated report"
-        git push
+    - name: Commit report file
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Commit report file
