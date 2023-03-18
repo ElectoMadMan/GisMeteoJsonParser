@@ -27,7 +27,7 @@ jobs:
       uses: actions/checkout@v2 # checkout the repository content to github runner
         
     - name: Create report file
-      run: date -u > report.txt
+      run: date -u >> report.txt
       
     - name: setup python
       uses: actions/setup-python@v4
