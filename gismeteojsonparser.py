@@ -28,7 +28,7 @@ def pogoda_today():
     temp_widget = soup.find('div', class_='widget-row-chart-temperature')
     temp_span = temp_widget.find_all('span', class_='unit unit_temperature_c')
     temp_data = []
-    for temp in temp_span[1:]:
+    for temp in temp_span:
       temp_data.append(temp.text)
     print(temp_data)
 
@@ -36,7 +36,7 @@ def pogoda_today():
     wind_widget = soup.find("div", class_='widget-row-wind-speed')
     wind_span = wind_widget.find_all('span', class_='unit_wind_m_s')
     wind_data = []
-    for wind in wind_span[1:]:
+    for wind in wind_span:
       wind_data.append(wind.text)
     print(wind_data)
 
@@ -52,7 +52,7 @@ def pogoda_today():
     press_widget = soup.find('div', class_ = 'widget-row-chart-pressure')#attrs = {'data-row': 'chart'})
     press_span = press_widget.find_all('span', class_='unit_pressure_mm_hg_atm')
     press_data=[]
-    for press in press_span[1:]:
+    for press in press_span:
       press_data.append(press.text)
     print(press_data)
 
@@ -66,7 +66,7 @@ def pogoda_today():
 
     pogoda_data = {'date': str(datenow), 'time':time_data, 'temperature': temp_data, 'windspeed': wind_data, 'precipitation': prec_data, 'pressure': press_data, 'humidity': hum_data}
     print(pogoda_data)
-    with open('data_pogoda', 'w', encoding='utf-8') as f:
+    with open('data_pogoda.json', 'w', encoding='utf-8') as f:
         f.write(json.dumps(pogoda_data, ensure_ascii=False, indent=4))
 
 
