@@ -13,8 +13,8 @@ def pogoda_today():
                       "Safari/537.36"})
     soup = bs(response.text, 'html.parser')
     
-    #with open('data_pogoda', 'w', encoding='utf-8') as f:
-    #    f.write(str(soup))
+    with open('pogoda.html', 'w', encoding='utf-8') as f:
+        f.write(str(soup))
     
     #Parse Time
     time_widget = soup.find('div', class_='widget-row-time')
