@@ -12,7 +12,6 @@ def pogoda_today():
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 "
                       "Safari/537.36"})
     soup = bs(response.text, 'html.parser')
-    
     with open('pogoda.html', 'w', encoding='utf-8') as f:
         f.write(str(soup))
     
@@ -29,7 +28,8 @@ def pogoda_today():
     temp_span = temp_widget.find_all('span', class_='unit unit_temperature_c')
     temp_data = []
     for temp in temp_span:
-      temp_data.append(temp.text)
+      if temp.text != "°C":
+        temp_data.append(temp.text)
     print(temp_data)
 
     #Parse WindSpeed
@@ -37,7 +37,8 @@ def pogoda_today():
     wind_span = wind_widget.find_all('span', class_='unit_wind_m_s')
     wind_data = []
     for wind in wind_span:
-      wind_data.append(wind.text)
+      if wind.text != "м/c":
+        wind_data.append(wind.text)
     print(wind_data)
 
     #Parse Precipitation
@@ -53,7 +54,8 @@ def pogoda_today():
     press_span = press_widget.find_all('span', class_='unit_pressure_mm_hg_atm')
     press_data=[]
     for press in press_span:
-      press_data.append(press.text)
+      if press.text != "мм рт. ст.":
+        press_data.append(press.text)
     print(press_data)
 
     #Parse Humidity
