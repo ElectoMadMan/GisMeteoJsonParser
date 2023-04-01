@@ -33,7 +33,7 @@ def pogoda_today():
     print(temp_data)
 
     #Parse WindSpeed
-    wind_widget = soup.find("div", class_='widget-row-wind-speed')
+    wind_widget = soup.find("div", class_='widget-row-wind-speed-gust')
     wind_span = wind_widget.find_all('span', class_='unit_wind_m_s')
     wind_data = []
     for wind in wind_span:
